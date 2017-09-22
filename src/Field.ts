@@ -42,12 +42,13 @@ function logField(field, clicked: { x, y }): void {
         var line = '|';
         row = '   ';
         col.map((pos, index) => {
+            const position = countedField[pos.x][pos.y];
             if (index === 0 && colIndex === 0)
                 line = line;
             if (index === 0)
                 line = ' ' + indexColor + (colIndex + 1) + resetColor + ' |';
-            if (countedField[pos.x][pos.y].opened) {
-                if (countedField[pos.x][pos.y].isBomb) {
+            if (position.opened) {
+                if (position.isBomb) {
                     let wasClicked;
                     if (pos.x === clicked.x && pos.y === clicked.y)
                         wasClicked = true;
@@ -65,6 +66,20 @@ function logField(field, clicked: { x, y }): void {
                     line += ' ' + numBombsString + resetColor + ' ';
                     row += '---';
                 }
+            } else if (position.marked === 1) {
+                let wasClicked;
+                if (pos.x === clicked.x && pos.y === clicked.y)
+                    wasClicked = true;
+                line += wasClicked ? '\x1b[47m' : '';
+                line += '\x1b[31m |>' + resetColor;
+                row += '---';
+            } else if (position.marked === 2) {
+                let wasClicked;
+                if (pos.x === clicked.x && pos.y === clicked.y)
+                    wasClicked = true;
+                line += wasClicked ? '\x1b[47m' : '';
+                line += '\x1b[31m ? ' + resetColor;
+                row += '---';
             } else {
                 line += '   ';
                 row += '---';
