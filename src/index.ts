@@ -3,46 +3,46 @@ import * as readline from 'readline';
 import { logField } from './Field';
 
 const fieldConfig: IFieldConfig = {
-    width: 9,
-    height: 9,
-    bombs: 9
+    width: 3,
+    height: 3,
+    bombs: 3
 };
 
 var battle = startBattle(fieldConfig);
-// do {
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 let x, y;
+
+console.log('\x1Bc');
 play();
 function play() {
+    logField(battle.field, { x, y });
     rl.question('Chose vertical col: ', (answer) => {
-        // TODO: Log the answer in a database
         console.log('you choose:', answer);
         x = +answer - 1;
-        // rl.close();
         rl.question('Chose horizontal pos ', (a) => {
-            rl.question('Chose mark (m) or open (o)  pos ', (m) => {
-                // TODO: Log the answer in a database
-                console.log('you choose:', a);
+            rl.question('Chose mark (m) or open (o) ', (m) => {
+                console.log('you choose:', m);
                 y = +a - 1;
+                console.log('\x1Bc');
                 battle = m === 'o' ? clickPosition(battle, { x, y }) : battleMarkPosition(battle, { x, y });
-                logField(battle.field, { x, y });
+
+                if (battle.message) console.log(battle.message);
+
                 if (!battle.isOver) {
                     play();
                 } else {
+                    logField(battle.field, { x, y });
+                    if (battle.winner) console.log('YOU WIN! =D');
+                    else console.log('YOU LOSE! :(');
                     rl.close();
                 }
             });
         });
     });
 }
-// const x = Math.floor((battle.field.length - 1) * Math.random() + 1);
-// const y = Math.floor((battle.field[0].length - 1) * Math.random() + 1);
-
-// }
-// while (!battle.isOver);
 
 export {
     clickPosition, startBattle, IFieldConfig

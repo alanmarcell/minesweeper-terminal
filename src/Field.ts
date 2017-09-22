@@ -30,7 +30,7 @@ function logNumBombs(numBombs, numBombsString) {
 }
 
 // TODO break in small functions
-function logField(field, clicked: { x, y }): void {
+function logField(field, clicked: { x, y }, devMode?): void {
     const countedField: IField = field;
     const indexColor = '\x1b[37m';
     const resetColor = '\x1b[0m';
@@ -47,7 +47,7 @@ function logField(field, clicked: { x, y }): void {
                 line = line;
             if (index === 0)
                 line = ' ' + indexColor + (colIndex + 1) + resetColor + ' |';
-            if (position.opened) {
+            if (position.opened || devMode) {
                 if (position.isBomb) {
                     let wasClicked;
                     if (pos.x === clicked.x && pos.y === clicked.y)
