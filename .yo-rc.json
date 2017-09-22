@@ -1,0 +1,9 @@
+{
+  "generator-ptz": {
+    "promptValues": {
+      "appname": "minesweeper-terminal",
+      "githubAuthor": "alanmarcell",
+      "codecovToken": "82080c02-7a3b-43bf-b492-37e545f81cf1"
+    }
+  }
+}
