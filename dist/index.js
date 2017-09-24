@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.IFieldConfig = exports.startBattle = exports.clickPosition = undefined;
+exports.startBattle = exports.clickPosition = undefined;
 
 var _minesweeperCore = require('minesweeper-core');
 
@@ -16,9 +16,9 @@ var _Field = require('./Field');
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var fieldConfig = {
-    width: 3,
-    height: 3,
-    bombs: 3
+    width: 9,
+    height: 9,
+    bombs: 9
 };
 var battle = (0, _minesweeperCore.startBattle)(fieldConfig);
 var rl = readline.createInterface({
@@ -31,11 +31,11 @@ console.log('\x1Bc');
 play();
 function play() {
     (0, _Field.logField)(battle.field, { x: x, y: y });
-    rl.question('Chose vertical col: ', function (answer) {
+    rl.question('Chose row: ', function (answer) {
         console.log('you choose:', answer);
         x = +answer - 1;
-        rl.question('Chose horizontal pos ', function (a) {
-            rl.question('Chose mark (m) or open (o) ', function (m) {
+        rl.question('Choose col ', function (a) {
+            rl.question('Choose mark (m) or open (o) ', function (m) {
                 console.log('you choose:', m);
                 y = +a - 1;
                 console.log('\x1Bc');
@@ -55,6 +55,5 @@ function play() {
 }
 exports.clickPosition = _minesweeperCore.clickPosition;
 exports.startBattle = _minesweeperCore.startBattle;
-exports.IFieldConfig = _minesweeperCore.IFieldConfig;
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

@@ -3,9 +3,9 @@ import * as readline from 'readline';
 import { logField } from './Field';
 
 const fieldConfig: IFieldConfig = {
-    width: 3,
-    height: 3,
-    bombs: 3
+    width: 9,
+    height: 9,
+    bombs: 9
 };
 
 var battle = startBattle(fieldConfig);
@@ -19,11 +19,11 @@ console.log('\x1Bc');
 play();
 function play() {
     logField(battle.field, { x, y });
-    rl.question('Chose vertical col: ', (answer) => {
+    rl.question('Chose row: ', (answer) => {
         console.log('you choose:', answer);
         x = +answer - 1;
-        rl.question('Chose horizontal pos ', (a) => {
-            rl.question('Chose mark (m) or open (o) ', (m) => {
+        rl.question('Choose col ', (a) => {
+            rl.question('Choose mark (m) or open (o) ', (m) => {
                 console.log('you choose:', m);
                 y = +a - 1;
                 console.log('\x1Bc');
